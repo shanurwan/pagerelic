@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.go text eol=lf diff=golang
+*.ps1 text eol=crlf
+*.gz binary
+# Fuzz regression corpora are exact byte sequences.
+**/testdata/fuzz/** -text

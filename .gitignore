@@ -1,0 +1,27 @@
+# Build output
+/bin/
+/dist/
+*.exe
+*.test
+*.out
+coverage.*
+
+# Never commit real database files, recovery output or images. Test
+# fixtures live in testdata/ as gzip files generated from synthetic data.
+/pgdata/
+/data/
+/carved/
+*.pages
+*.jsonl
+!testdata/**/*.jsonl.gz
+*.manifest.json
+*.img
+*.dd
+*.raw
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
