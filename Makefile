@@ -34,14 +34,9 @@ lint:
 vuln:
 	$(GO) run golang.org/x/vuln/cmd/govulncheck@v1.8.0 ./...
 
-# Every parser of on-disk bytes.
+# Every parser of on-disk bytes. Fails on real findings only; see scripts/fuzz.sh.
 fuzz:
-	$(GO) test ./internal/page    -run '^$$' -fuzz '^FuzzHeaderAndItems$$' -fuzztime $(FUZZTIME)
-	$(GO) test ./internal/heap    -run '^$$' -fuzz '^FuzzParseHeader$$'    -fuzztime $(FUZZTIME)
-	$(GO) test ./internal/datum   -run '^$$' -fuzz '^FuzzDecompress$$'     -fuzztime $(FUZZTIME)
-	$(GO) test ./internal/datum   -run '^$$' -fuzz '^FuzzFormat$$'         -fuzztime $(FUZZTIME)
-	$(GO) test ./internal/recover -run '^$$' -fuzz '^FuzzScanPage$$'       -fuzztime $(FUZZTIME)
-	$(GO) test ./internal/carve   -run '^$$' -fuzz '^FuzzExamine$$'        -fuzztime $(FUZZTIME)
+	FUZZTIME=$(FUZZTIME) bash scripts/fuzz.sh
 
 cross:
 	@for p in $(PLATFORMS); do \

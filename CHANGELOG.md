@@ -24,3 +24,10 @@ the project uses [Semantic Versioning](https://semver.org/).
   JSONL/CSV output with SHA-256 manifests.
 - Real PostgreSQL 17.4 fixtures with `pageinspect` answer keys, a
   three-stage pruning experiment, and fuzz targets for every parser.
+
+### Fixed
+
+- CI fuzz job no longer fails when Go's fuzzing engine reports "context
+  deadline exceeded" at the end of `-fuzztime` without producing a failing
+  input; that case is reported as a warning. Real findings still fail the
+  job (`scripts/fuzz.sh`).
